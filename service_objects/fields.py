@@ -64,8 +64,7 @@ class MultipleFormField(forms.Field):
         for index, item in enumerate(values):
             item_form = self.form_class(item)
             if not item_form.is_valid():
-                raise ValidationError(
-                    '[{}]: {}'.format(index, repr(item_form.errors)))
+                raise ValidationError(f'[{index}]: {repr(item_form.errors)}')
             item_forms.append(item_form)
 
         return item_forms

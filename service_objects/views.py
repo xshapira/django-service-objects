@@ -13,7 +13,7 @@ class ServiceViewMixin(object):
         Overrides base class; returns :attr:`form_class` if defined,
         otherwise :attr:`service_class`.
         """
-        return self.form_class if self.form_class else self.service_class
+        return self.form_class or self.service_class
 
     def get_service_class(self):
         """
@@ -41,11 +41,7 @@ class ServiceViewMixin(object):
         If the current request is ``POST`` or ``PUT``, returns
         :attr:`request.FILES` otherwise ``None``
         """
-        rv = None
-        if self.request.method in ('POST', 'PUT'):
-            rv = self.request.FILES
-
-        return rv
+        return self.request.FILES if self.request.method in ('POST', 'PUT') else None
 
     def form_valid(self, form):
         """

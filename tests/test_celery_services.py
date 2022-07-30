@@ -17,8 +17,9 @@ from tests.services import FooModelService
 class CeleryServiceTest(TestCase):
     def setUp(self):
         self.foo = CustomFooModel.objects.create(
-            custom_pk="custom-{}".format(id(self)), one="custom"
+            custom_pk=f"custom-{id(self)}", one="custom"
         )
+
         self.initial_data = {
             "foo": self.foo,
             "date": datetime.date.today(),
